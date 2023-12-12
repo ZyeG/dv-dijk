@@ -55,6 +55,12 @@ public class NetworkSimulator
         entity[2] = new Entity2();
         entity[3] = new Entity3();
 
+        System.out.println("init tables");
+        for (int i = 0; i < NUMENTITIES; i++)
+        {
+            entity[i].printDT();
+        }
+
         if (linkChanges)
         {
             eventList.add(new Event(10000.0, LINKCHANGE, 0));
@@ -140,13 +146,24 @@ public class NetworkSimulator
         }
         
         System.out.println("Simulator terminated at t=" + time +
-                           ", no packets in medium.");        
+                           ", no packets in medium.");  
+        System.out.println("Final table for Entities:");
+        for (int i = 0; i < NUMENTITIES; i++)
+        {
+            this.entity[i].printDT();
+        }
+
+        System.out.println("Final dv table:");
+        for (int i = 0; i < NUMENTITIES; i++)
+        {
+            for (int j = 0; j < NUMENTITIES; j++) {
+                System.out.print(this.entity[i].distanceTable[i][j] + " ");
+            }
+            System.out.println();
+        }
+
     }
     
-    // Sends a packet into the medium
-    /**** Warning!  This will allow an entity to send packets that they
-          couldn't possibly send (e.g. Entity 1 could send a packet from
-          0 to 3).  This should be fixed later... ****/
     public static void toLayer2(Packet p)
     {
         Packet currentPacket;
@@ -174,6 +191,8 @@ public class NetworkSimulator
         {
             System.out.println("toLayer2(): WARNING: Source and destination " +
                                "not connected; ignoring.");
+            System.out.println("toLayer2(): source=" + p.getSource() + 
+                               " dest=" + p.getDest());
             return;
         }
         

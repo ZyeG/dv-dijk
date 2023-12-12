@@ -19,7 +19,7 @@ public class Project
         
         while (trace < 0)
         {
-            System.out.print("Enter trace level (>= 0): [0] ");
+            System.out.print("Enter trace level: (=0: no trace, =1, trace) ");
             try
             {
                 buffer = stdIn.readLine();
@@ -49,16 +49,16 @@ public class Project
 
         while ((hasLinkChange < 0) || (hasLinkChange > 1))
         {
-            System.out.print("Will the link change (1 = Yes, 0 = No): [0] ");
-            try
-            {
-                buffer = stdIn.readLine();
-            }
-            catch (IOException ioe)
-            {
-                System.out.println("IOError reading your input!");
-                System.exit(1);
-            }
+            // System.out.print("Will the link change (1 = Yes, 0 = No): ");
+            // try
+            // {
+            //     buffer = stdIn.readLine();
+            // }
+            // catch (IOException ioe)
+            // {
+            //     System.out.println("IOError reading your input!");
+            //     System.exit(1);
+            // }
             
             if (buffer.equals(""))
             {
@@ -79,7 +79,7 @@ public class Project
 
         while (seed < 1)
         {
-            System.out.print("Enter random seed: [random] ");
+            System.out.print("Enter random seed for packet sending schedule: [random] ");
             try
             {
                 buffer = stdIn.readLine();
@@ -119,5 +119,6 @@ public class Project
         simulator = new NetworkSimulator(hasChange, trace, seed);
                                                 
         simulator.runSimulator();
+        
     }
 }
