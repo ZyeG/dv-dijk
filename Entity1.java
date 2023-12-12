@@ -69,31 +69,14 @@ public class Entity1 extends Entity {
 
     public void linkCostChangeHandler(int whichLink, int newCost) {
         int s = 1;
-        System.out.println("e1 linkCostChangeHandler, before update");
-        printDT();
-        boolean change = false;
-        if (this.distanceTable[s][whichLink] > newCost) {
-            this.distanceTable[s][whichLink] = newCost;
-            change = true;
-        }
-        if (change) {
-            System.out.println("e1 linkCostChangeHandler, after update");
-            printDT();
-            System.out.println();
-        } else {
-            System.out.println("e1 linkCostChangeHandler, no change");
-            System.out.println();
-        }
-
-        if (change) {
-            for (int i = 0; i < NetworkSimulator.NUMENTITIES; i++) {
+        this.distanceTable[s][whichLink] = newCost;
+        for (int i = 0; i < NetworkSimulator.NUMENTITIES; i++) {
                 if (NetworkSimulator.cost[s][i] != 999 && i != s) {
                     System.out.println("e1 linkCostChangeHandler, toLayer2(): source=" + s +
                             " dest=" + i);
                     NetworkSimulator.toLayer2(new Packet(s, i, this.distanceTable[s]));
                 }
             }
-        }
     }
 
     public void printDT() {

@@ -79,7 +79,15 @@ public class Entity0 extends Entity {
 
     public void linkCostChangeHandler(int whichLink, int newCost) 
     {
-        
+        int s = 0;
+        this.distanceTable[s][whichLink] = newCost;
+        for (int i = 0; i < NetworkSimulator.NUMENTITIES; i++) {
+                if (NetworkSimulator.cost[s][i] != 999 && i != s) {
+                    System.out.println("e0 linkCostChangeHandler, toLayer2(): source=" + s + 
+                               " dest=" + i);
+                    NetworkSimulator.toLayer2(new Packet(s, i, this.distanceTable[s]));
+                }
+            }
     }
 
     public void printDT() {
