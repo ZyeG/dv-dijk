@@ -76,7 +76,7 @@ public class Project
                 }
             }
         }
-
+        hasLinkChange=0;
         while (seed < 1)
         {
             System.out.print("Enter random seed for packet sending schedule: [random] ");
